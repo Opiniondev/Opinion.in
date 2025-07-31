@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Opinion - Speak Your Mind</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #e8f0fe;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #1976d2;
+      color: white;
+      padding: 15px;
+      text-align: center;
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    textarea {
+      width: 100%;
+      height: 100px;
+      padding: 10px;
+      margin-bottom: 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: #1976d2;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .opinion {
+      background: white;
+      padding: 15px;
+      margin-top: 15px;
+      border-radius: 10px;
+      box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    }
+
+    .opinion-actions {
+      margin-top: 10px;
+    }
+
+    .opinion-actions button {
+      margin-right: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<header>🗣️ Opinion</header>
+
+<div class="container">
+  <textarea id="opinionInput" placeholder="What's your opinion on trending topics?"></textarea>
+  <button onclick="postOpinion()">Post</button>
+
+  <div id="opinionFeed"></div>
+</div>
+
+<script>
+  function postOpinion() {
+    const input = document.getElementById("opinionInput");
+    const text = input.value.trim();
+    if (text === "") return;
+
+    const feed = document.getElementById("opinionFeed");
+
+    const post = document.createElement("div");
+    post.className = "opinion";
+    post.innerHTML = `
+      <p>${text}</p>
+      <div class="opinion-actions">
+        <button onclick="like(this)">👍 Like</button>
+        <button onclick="dislike(this)">👎 Dislike</button>
+      </div>
+    `;
+
+    feed.prepend(post);
+    input.value = "";
+  }
+
+  function like(btn) {
+    btn.innerHTML = `👍 Liked`;
+  }
+
+  function dislike(btn) {
+    btn.innerHTML = `👎 Disliked`;
+  }
+</script>
+
+</body>
+</html>
